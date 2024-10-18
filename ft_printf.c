@@ -6,18 +6,16 @@
 /*   By: ncharbog <ncharbog@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 10:02:38 by ncharbog          #+#    #+#             */
-/*   Updated: 2024/10/18 15:39:51 by ncharbog         ###   ########.fr       */
+/*   Updated: 2024/10/18 15:46:11 by ncharbog         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "printf.h"
-#include <stdarg.h>
-#include <unistd.h>
 
 int	ft_printf(char const *format, ...)
 {
 	int		i;
-	int		c;
+	int		f;
 	char 	*s;
 	va_list	args;
 
@@ -34,24 +32,30 @@ int	ft_printf(char const *format, ...)
 				write(1, &format[i], 1);
 			if (format[i] == 'c')
 			{
-				c = (char) va_arg(args, int);
-				ft_putchar(c);
+				f = (char) va_arg(args, int);
+				ft_putchar(f);
 			}
 			if (format[i] == 's')
 			{
 				s = va_arg(args, char *);
 				ft_putstr(s);
 			}
+			if (format[i] == 'd')
+			{
+				f = va_arg
+			}
 			i++;
 		}
-		write(1, &format[i], 1);
+		ft_putchar(format[i]);
 		i++;
 	}
 	va_end (args);
 	return (1);
 }
 
+#include <stdio.h>
+
 int main()
 {
-	ft_printf("cou%cou %s %s", 'c', "jjjj", "Lqurq");
+	ft_printf("cou%sou %s %s", 'c', "jjjj", "Lqurq");
 }
