@@ -1,23 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   printf.h                                           :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ncharbog <ncharbog@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/18 13:50:40 by ncharbog          #+#    #+#             */
-/*   Updated: 2024/10/18 15:40:44 by ncharbog         ###   ########.fr       */
+/*   Created: 2024/10/18 15:34:25 by ncharbog          #+#    #+#             */
+/*   Updated: 2024/10/18 15:36:17 by ncharbog         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PRINTF_H
-# define PRINTF_H
+#include "printf.h"
 
-# include <stdarg.h>
-# include <unistd.h>
+void	ft_putstr(char *s)
+{
+	int	i;
 
-void	ft_putstr(char *s);
-void	ft_putchar(char c);
-int		ft_printf(char const *format, ...);
+	i = 0;
+	while (s[i])
+	{
+		write(1, &s[i], 1);
+		i++;
+	}
+}
 
-# endif
+void	ft_putchar(char c)
+{
+	write(1, &c, 1);
+}

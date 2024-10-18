@@ -6,33 +6,13 @@
 /*   By: ncharbog <ncharbog@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 10:02:38 by ncharbog          #+#    #+#             */
-/*   Updated: 2024/10/18 15:13:29 by ncharbog         ###   ########.fr       */
+/*   Updated: 2024/10/18 15:39:51 by ncharbog         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "printf.h"
 #include <stdarg.h>
 #include <unistd.h>
-
-void	ft_format_char(int c)
-{
-	char	a;
-	
-	a = (char)c;
-	if (a)
-		write(1, &a, 1);
-}
-
-void	ft_format_str(char *s)
-{
-	int	i;
-
-	i = 0;
-	while (s[i])
-	{
-		write(1, &s[i], 1);
-		i++;
-	}
-}
 
 int	ft_printf(char const *format, ...)
 {
@@ -54,13 +34,13 @@ int	ft_printf(char const *format, ...)
 				write(1, &format[i], 1);
 			if (format[i] == 'c')
 			{
-				c = va_arg(args, int);
-				ft_format_char(c);
+				c = (char) va_arg(args, int);
+				ft_putchar(c);
 			}
 			if (format[i] == 's')
 			{
 				s = va_arg(args, char *);
-				ft_format_str(s);
+				ft_putstr(s);
 			}
 			i++;
 		}
