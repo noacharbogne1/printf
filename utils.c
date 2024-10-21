@@ -6,11 +6,11 @@
 /*   By: ncharbog <ncharbog@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 15:34:25 by ncharbog          #+#    #+#             */
-/*   Updated: 2024/10/21 14:21:20 by ncharbog         ###   ########.fr       */
+/*   Updated: 2024/10/21 18:21:06 by ncharbog         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "printf.h"
+#include "ft_printf.h"
 
 int		ft_putstr(char *s)
 {
@@ -55,27 +55,25 @@ int	ft_count(int nbr, char *base)
 
 int	ft_putnbr_base(int nbr, char *base)
 {
-	unsigned int	nb;	
+	long long int	nb;
 	int				i;
-	unsigned int	len;
+	int				len;
 
 	i = 0;
 	while (base[i])
 		i++;
-	len = i;
-	i = 0;
+	len = ft_count(nbr, base);
 	if (nbr < 0)
 	{
 		write (1, "-", 1);
-		nb = (unsigned int) nbr * -1;
+		nb = (long long int) nbr * -1;
 	}
 	else
-		nb = (unsigned int) nbr;
-	if (nb >= len)
-		ft_putnbr_base(nb / len, base);
-	ft_putchar(base[nb % len]);
-	i = ft_count(nbr, base);
-	return (i);
+		nb = (long long int) nbr;
+	if (nb >= i)
+		ft_putnbr_base(nb / i, base);
+	ft_putchar(base[nb % i]);
+	return (len);
 }
 
 int	ft_p(int f)
@@ -90,17 +88,18 @@ int	ft_p(int f)
 	return (len);
 }
 
-int	ft_putnbr_u(unsigned int nb)
+int	ft_putnbr_u(long long nb)
 {
-	int	i;
+	unsigned int	len;
 
-	i = 0;
+	nbr = 0;
+	if (nb < 0)
+		nb = UINT_MAX - (-nb) + 1;
+	len = ft_count(nbr, "0123456789");
 	if (nb > 9)
 	{
 		ft_putnbr_u(nb / 10);
-		i++;
 	}
 	ft_putchar(nb % 10 + '0');
-	i++;
-	return (i);
+	return (len);
 }

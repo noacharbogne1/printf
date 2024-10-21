@@ -6,14 +6,16 @@
 /*   By: ncharbog <ncharbog@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 10:02:38 by ncharbog          #+#    #+#             */
-/*   Updated: 2024/10/21 14:53:01 by ncharbog         ###   ########.fr       */
+/*   Updated: 2024/10/21 17:59:33 by ncharbog         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "printf.h"
+#include "ft_printf.h"
 
 int	ft_format(char format, va_list args)
 {
+	if (format == '%')
+		return (ft_putchar(format));
 	if (format == 'c')
 		return (ft_putchar((char)va_arg(args, int)));
 	if (format == 's')
@@ -27,7 +29,7 @@ int	ft_format(char format, va_list args)
 	if (format == 'p')
 		return (ft_p(va_arg(args, int)));
 	if (format == 'u')
-		return (ft_putnbr_u(va_arg(args, unsigned int)));
+		return (ft_putnbr_u((long long)va_arg(args, int)));
 	return (0);
 }
 
@@ -42,17 +44,18 @@ int	ft_printf(char const *format, ...)
 	va_start(args, format);
 	while (format[i])
 	{
-		if (format[i] == '%')
+		if (format[i] && format[i] == '%')
 		{
 			i++;
-			if (format[i] == '%')
-				ft_putchar(format[i]);
-			else
-				len += ft_format(format[i], args);
+			len += ft_format(format[i], args);
 			i++;
 		}
-		ft_putchar(format[i]);
-		i++;
+		else if (format[i])
+		{
+			ft_putchar(format[i]);
+			i++;
+			len++;
+		}
 	}
 	va_end (args);
 	return (len);
@@ -62,7 +65,6 @@ int	ft_printf(char const *format, ...)
 
 int main()
 {
-	int r = ft_printf("coucou %d\n", 1978000);
-	ft_printf("%d\n", r);
-	//printf("coucou %x\n", "jour");
+	printf("len: %d\n",ft_printf(" %u ", -9));
+    printf("len: %d\n",printf(" %u ", -9));
 }
