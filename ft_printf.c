@@ -6,22 +6,39 @@
 /*   By: ncharbog <ncharbog@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 10:02:38 by ncharbog          #+#    #+#             */
-/*   Updated: 2024/10/21 11:32:36 by ncharbog         ###   ########.fr       */
+/*   Updated: 2024/10/21 14:53:01 by ncharbog         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "printf.h"
 
+int	ft_format(char format, va_list args)
+{
+	if (format == 'c')
+		return (ft_putchar((char)va_arg(args, int)));
+	if (format == 's')
+		return (ft_putstr(va_arg(args, char *)));
+	if (format == 'd' || format == 'i')
+		return (ft_putnbr_base(va_arg(args, int), "0123456789"));
+	if (format == 'x')
+		return (ft_putnbr_base(va_arg(args, int), "0123456789abcdef"));
+	if (format == 'X')
+		return (ft_putnbr_base(va_arg(args, int), "0123456789ABCDEF"));
+	if (format == 'p')
+		return (ft_p(va_arg(args, int)));
+	if (format == 'u')
+		return (ft_putnbr_u(va_arg(args, unsigned int)));
+	return (0);
+}
+
 int	ft_printf(char const *format, ...)
 {
 	int		i;
-	int		f;
-	char 	*s;
+	int		len;
 	va_list	args;
 
 	i = 0;
-	f = 0;
-	s = NULL;
+	len = 0;
 	va_start(args, format);
 	while (format[i])
 	{
@@ -30,53 +47,22 @@ int	ft_printf(char const *format, ...)
 			i++;
 			if (format[i] == '%')
 				ft_putchar(format[i]);
-			if (format[i] == 'c')
-			{
-				f = (char) va_arg(args, int);
-				ft_putchar(f);
-			}
-			if (format[i] == 's')
-			{
-				s = va_arg(args, char *);
-				ft_putstr(s);
-			}
-			if (format[i] == 'd' || format[i] == 'i')
-			{
-				f = va_arg(args, int);
-				ft_putnbr_base(f, "0123456789");
-			}
-			if (format[i] == 'x')
-			{
-				f = va_arg(args, int);
-				ft_putnbr_base(f, "0123456789abcdef");
-			}
-			if (format[i] == 'X')
-			{
-				f = va_arg(args, int);
-				ft_putnbr_base(f, "0123456789ABCDEF");
-			}
-			if (format[i] == 'p')
-			{
-				f = va_arg(args, int);
-				ft_p(f);
-			}
-			if (format[i] == 'u')
-			{
-				f = va_arg(args, unsigned int);
-				ft_putnbr_u(f);
-			}
+			else
+				len += ft_format(format[i], args);
 			i++;
 		}
 		ft_putchar(format[i]);
 		i++;
 	}
 	va_end (args);
-	return (1);
+	return (len);
 }
 
 #include <stdio.h>
 
 int main()
 {
-	ft_printf("cou%sou %s %s", 'c', "jjjj", "Lqurq");
+	int r = ft_printf("coucou %d\n", 1978000);
+	ft_printf("%d\n", r);
+	//printf("coucou %x\n", "jour");
 }
