@@ -6,7 +6,7 @@
 /*   By: ncharbog <ncharbog@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 10:02:38 by ncharbog          #+#    #+#             */
-/*   Updated: 2024/10/18 15:46:11 by ncharbog         ###   ########.fr       */
+/*   Updated: 2024/10/21 11:32:36 by ncharbog         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	ft_printf(char const *format, ...)
 	va_list	args;
 
 	i = 0;
-	c = 0;
+	f = 0;
 	s = NULL;
 	va_start(args, format);
 	while (format[i])
@@ -29,7 +29,7 @@ int	ft_printf(char const *format, ...)
 		{
 			i++;
 			if (format[i] == '%')
-				write(1, &format[i], 1);
+				ft_putchar(format[i]);
 			if (format[i] == 'c')
 			{
 				f = (char) va_arg(args, int);
@@ -40,9 +40,30 @@ int	ft_printf(char const *format, ...)
 				s = va_arg(args, char *);
 				ft_putstr(s);
 			}
-			if (format[i] == 'd')
+			if (format[i] == 'd' || format[i] == 'i')
 			{
-				f = va_arg
+				f = va_arg(args, int);
+				ft_putnbr_base(f, "0123456789");
+			}
+			if (format[i] == 'x')
+			{
+				f = va_arg(args, int);
+				ft_putnbr_base(f, "0123456789abcdef");
+			}
+			if (format[i] == 'X')
+			{
+				f = va_arg(args, int);
+				ft_putnbr_base(f, "0123456789ABCDEF");
+			}
+			if (format[i] == 'p')
+			{
+				f = va_arg(args, int);
+				ft_p(f);
+			}
+			if (format[i] == 'u')
+			{
+				f = va_arg(args, unsigned int);
+				ft_putnbr_u(f);
 			}
 			i++;
 		}
