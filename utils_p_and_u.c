@@ -6,7 +6,7 @@
 /*   By: ncharbog <ncharbog@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 09:46:40 by ncharbog          #+#    #+#             */
-/*   Updated: 2024/10/22 09:47:52 by ncharbog         ###   ########.fr       */
+/*   Updated: 2024/10/22 10:05:29 by ncharbog         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	ft_putnbr_u(unsigned int nb, char *base)
 {
 	unsigned int	len;
 	unsigned int	i;
-	
+
 	i = 0;
 	while (base[i])
 		i++;

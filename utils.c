@@ -6,17 +6,19 @@
 /*   By: ncharbog <ncharbog@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 15:34:25 by ncharbog          #+#    #+#             */
-/*   Updated: 2024/10/22 09:47:16 by ncharbog         ###   ########.fr       */
+/*   Updated: 2024/10/22 10:05:42 by ncharbog         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int		ft_putstr(char *s)
+int	ft_putstr(char *s)
 {
 	int	i;
 
 	i = 0;
+	if (!s)
+		s = "(null)";
 	while (s[i])
 	{
 		write(1, &s[i], 1);
