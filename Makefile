@@ -6,7 +6,7 @@
 #    By: ncharbog <ncharbog@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/21 14:57:09 by ncharbog          #+#    #+#              #
-#    Updated: 2024/10/21 15:18:19 by ncharbog         ###   ########.fr        #
+#    Updated: 2024/10/22 09:48:13 by ncharbog         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,6 +17,7 @@ CFLAGS += -Wall -Werror -Wextra
 NAME = libftprintf.a
 
 SRC = ft_printf.c\
+	utils_p_and_u.c\
 	utils.c 
 
 OBJ = $(SRC:.c=.o)

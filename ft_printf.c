@@ -6,7 +6,7 @@
 /*   By: ncharbog <ncharbog@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 10:02:38 by ncharbog          #+#    #+#             */
-/*   Updated: 2024/10/21 17:59:33 by ncharbog         ###   ########.fr       */
+/*   Updated: 2024/10/22 09:45:47 by ncharbog         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,22 +21,22 @@ int	ft_format(char format, va_list args)
 	if (format == 's')
 		return (ft_putstr(va_arg(args, char *)));
 	if (format == 'd' || format == 'i')
-		return (ft_putnbr_base(va_arg(args, int), "0123456789"));
+		return (ft_putnbr_base((long long)va_arg(args, int), "0123456789"));
 	if (format == 'x')
-		return (ft_putnbr_base(va_arg(args, int), "0123456789abcdef"));
+		return (ft_putnbr_u((unsigned int)va_arg(args, int), "0123456789abcdef"));
 	if (format == 'X')
-		return (ft_putnbr_base(va_arg(args, int), "0123456789ABCDEF"));
+		return (ft_putnbr_u((unsigned int)va_arg(args, int), "0123456789ABCDEF"));
 	if (format == 'p')
-		return (ft_p(va_arg(args, int)));
+		return (ft_p(va_arg(args, void *)));
 	if (format == 'u')
-		return (ft_putnbr_u((long long)va_arg(args, int)));
+		return (ft_putnbr_u((unsigned int)va_arg(args, int), "0123456789"));
 	return (0);
 }
 
 int	ft_printf(char const *format, ...)
 {
-	int		i;
-	int		len;
+	unsigned int	i;
+	unsigned int	len;
 	va_list	args;
 
 	i = 0;
@@ -59,12 +59,4 @@ int	ft_printf(char const *format, ...)
 	}
 	va_end (args);
 	return (len);
-}
-
-#include <stdio.h>
-
-int main()
-{
-	printf("len: %d\n",ft_printf(" %u ", -9));
-    printf("len: %d\n",printf(" %u ", -9));
 }

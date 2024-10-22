@@ -1,37 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   utils_p_and_u.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ncharbog <ncharbog@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/18 15:34:25 by ncharbog          #+#    #+#             */
-/*   Updated: 2024/10/22 09:47:16 by ncharbog         ###   ########.fr       */
+/*   Created: 2024/10/22 09:46:40 by ncharbog          #+#    #+#             */
+/*   Updated: 2024/10/22 09:47:52 by ncharbog         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int		ft_putstr(char *s)
+int	ft_putnbr_u(unsigned int nb, char *base)
 {
-	int	i;
-
+	unsigned int	len;
+	unsigned int	i;
+	
 	i = 0;
-	while (s[i])
-	{
-		write(1, &s[i], 1);
+	while (base[i])
 		i++;
-	}
-	return (i);
+	len = ft_count(nb, base);
+	if (nb >= i)
+		ft_putnbr_u(nb / i, base);
+	ft_putchar(base[nb % i]);
+	return (len);
 }
 
-int	ft_putchar(char c)
-{
-	write(1, &c, 1);
-	return (1);
-}
-
-int	ft_count(long long nb, char *base)
+int	ft_count_p(uint64_t nb, char *base)
 {
 	unsigned int	count;
 	unsigned int	i;
@@ -53,25 +49,31 @@ int	ft_count(long long nb, char *base)
 	return (count + 1);
 }
 
-int	ft_putnbr_base(long long nbr, char *base)
+int	ft_putnbr_base_p(uint64_t nb, char *base)
 {
-	long long		nb;
 	unsigned int	i;
 	unsigned int	len;
 
 	i = 0;
 	while (base[i])
 		i++;
-	len = ft_count(nbr, base);
-	if (nbr < 0)
-	{
-		write (1, "-", 1);
-		nb = nbr * -1;
-	}
-	else
-		nb = nbr;
+	len = ft_count_p(nb, base);
 	if (nb >= i)
 		ft_putnbr_base(nb / i, base);
 	ft_putchar(base[nb % i]);
+	return (len);
+}
+
+int	ft_p(void *nb)
+{
+	unsigned int	len;
+	uint64_t		adress;
+
+	len = 0;
+	adress = (uint64_t)nb;
+	if (adress == 0)
+		return (ft_putstr("(nil)"));
+	len = ft_putstr("0x");
+	len += ft_putnbr_base_p(adress, "0123456789abcdef");
 	return (len);
 }

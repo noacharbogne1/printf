@@ -6,7 +6,7 @@
 /*   By: ncharbog <ncharbog@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 13:50:40 by ncharbog          #+#    #+#             */
-/*   Updated: 2024/10/21 18:01:11 by ncharbog         ###   ########.fr       */
+/*   Updated: 2024/10/22 09:25:32 by ncharbog         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,16 @@
 # include <stdarg.h>
 # include <unistd.h>
 # include <limits.h>
+# include <stdint.h>
 
 int		ft_putstr(char *s);
 int		ft_putchar(char c);
 int		ft_printf(char const *format, ...);
-int		ft_putnbr_base(int nbr, char *base);
-int		ft_count(int nbr, char *base);
-int		ft_putnbr_u(long long nb);
-int		ft_p(int f);
+int		ft_putnbr_base(long long nbr, char *base);
+int		ft_putnbr_base_p(uint64_t nb, char *base);
+int		ft_count(long long nb, char *base);
+int		ft_count_p(uint64_t nb, char *base);
+int		ft_putnbr_u(unsigned int nb, char *base);
+int		ft_p(void *nb);
 
 # endif
