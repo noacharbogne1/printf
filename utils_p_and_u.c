@@ -6,7 +6,7 @@
 /*   By: ncharbog <ncharbog@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 09:46:40 by ncharbog          #+#    #+#             */
-/*   Updated: 2024/10/22 10:05:29 by ncharbog         ###   ########.fr       */
+/*   Updated: 2024/10/24 08:54:48 by ncharbog         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,6 @@ int	ft_count_p(uint64_t nb, char *base)
 	while (base[i])
 		i++;
 	count = 0;
-	if (nb < 0)
-	{
-		nb = -nb;
-		count++;
-	}
 	while (nb >= i)
 	{
 		nb = nb / i;
