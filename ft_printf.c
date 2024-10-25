@@ -6,7 +6,7 @@
 /*   By: ncharbog <ncharbog@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 10:02:38 by ncharbog          #+#    #+#             */
-/*   Updated: 2024/10/24 08:55:40 by ncharbog         ###   ########.fr       */
+/*   Updated: 2024/10/25 13:06:20 by ncharbog         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 int	ft_format(char format, va_list args)
 {
-
 	if (format == '%')
 		return (ft_putchar(format));
 	if (format == 'c')
@@ -44,20 +43,20 @@ int	ft_printf(char const *format, ...)
 
 	i = 0;
 	len = 0;
+	if (!format)
+		return (-1);
 	va_start(args, format);
 	while (format[i])
 	{
 		if (format[i] && format[i] == '%')
 		{
 			i++;
-				while(format[i] == ' ')
-					i++;
 			len += ft_format(format[i], args);
 			i++;
 		}
 		else if (format[i])
 		{
-			len+= ft_putchar(format[i]);
+			len += ft_putchar(format[i]);
 			i++;
 		}
 	}
